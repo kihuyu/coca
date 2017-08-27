@@ -11,6 +11,8 @@ class Datacollection(models.Model):
     favourite_drink = models.CharField(max_length=50)
     date_of_collection = models.DateField()
     owner = models.ForeignKey('auth.User', related_name='datacollections', on_delete=models.CASCADE)
+    def save(self, *args, **kwargs):
+        super(Datacollection, self).save(*args, **kwargs)
     def __str__(self):
         return ('%s %s %s %s %s' % (self.name, str(self.latitude), str(self.longitude), self.favourite_drink, str(self.date_of_collection)))
 

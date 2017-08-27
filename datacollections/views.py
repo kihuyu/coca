@@ -12,6 +12,7 @@ from rest_framework import permissions
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
+from datacollections.permissions import IsOwner
 
 
 @api_view(['GET', 'POST'])
@@ -30,12 +31,13 @@ def datacollection_list(request, format=None):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-        def perform_create(self, serializer):
-            serializer.save(owner=self.request.user)
-        permission_classes = (permissions.IsAuthenticated,)
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)
+    permission_classes = (permissions.IsAuthenticated,IsOwner,)
 
 @api_view(['GET', 'PUT', 'DELETE'])
 def datacollection_detail(request, pk, format=None):
+    permission_classes = (permissions.IsAuthenticated, IsOwner,)
     """
     Retrieve, update or delete a data collection instance.
     """
@@ -58,7 +60,6 @@ def datacollection_detail(request, pk, format=None):
     elif request.method == 'DELETE':
         datacollection.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
-    permission_classes = (permissions.IsAuthenticated,)
 
 @api_view(['GET', 'POST'])
 def user_list(request, format=None):

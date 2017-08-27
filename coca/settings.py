@@ -55,9 +55,9 @@ REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.IsAuthenticated',
     ),
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
-    ),
+    #'DEFAULT_AUTHENTICATION_CLASSES': (
+    #    'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+    #),
 }
 
 ROOT_URLCONF = 'coca.urls'
@@ -77,6 +77,18 @@ TEMPLATES = [
         },
     },
 ]
+
+PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
+
+STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
+STATIC_URL = '/static/'
+
+# Extra places for collectstatic to find static files.
+STATICFILES_DIRS = (
+    os.path.join(PROJECT_ROOT, 'static'),
+)
+
+STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
 WSGI_APPLICATION = 'coca.wsgi.application'
 

@@ -11,7 +11,11 @@ urlpatterns = format_suffix_patterns([
     url(r'^datacollections/(?P<pk>[0-9]+)/$', views.datacollection_detail, name='datacollection-detail'),
     url(r'^users/$', views.user_list, name='user-list'),
     url(r'^users/(?P<pk>[0-9]+)/$', views.user_detail, name='user-detail'),
-    url(r'^api-auth/', obtain_jwt_token, name='token'),
 
 
 ])
+
+urlpatterns += [
+    url(r'^api-auth/', include('rest_framework.urls',
+                               namespace='rest_framework')),
+]
