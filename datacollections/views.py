@@ -33,7 +33,7 @@ def datacollection_list(request, format=None):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
-    permission_classes = (permissions.IsAuthenticated,IsOwner,)
+    permission_classes = (permissions.IsAuthenticated,)
 
 @api_view(['GET', 'PUT', 'DELETE'])
 def datacollection_detail(request, pk, format=None):

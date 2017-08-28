@@ -10,7 +10,7 @@ class Datacollection(models.Model):
     longitude = models.DecimalField(max_digits=20, decimal_places=15)
     favourite_drink = models.CharField(max_length=50)
     date_of_collection = models.DateField()
-    owner = models.ForeignKey('auth.User', related_name='datacollections', on_delete=models.CASCADE)
+    owner = models.ForeignKey('auth.user', related_name='datacollections', on_delete=models.CASCADE)
     def save(self, *args, **kwargs):
         super(Datacollection, self).save(*args, **kwargs)
     def __str__(self):
