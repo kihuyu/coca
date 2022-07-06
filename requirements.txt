@@ -38,7 +38,7 @@ Jinja2==2.9.6
 jsonschema==2.6.0
 jupyter-core==4.3.0
 keyboard==0.9.13
-lxml==3.7.3
+lxml==4.9.1
 Markdown==2.6.9
 MarkupSafe==1.0
 mercurial==3.7.3
